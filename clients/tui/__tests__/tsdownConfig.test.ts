@@ -149,12 +149,12 @@ describe("tui tsdown config", () => {
     ).dependencies.react;
     const inkPeerReact = readPackageJson("ink").peerDependencies?.react ?? "";
 
-    const floor = /^>=(\d+)\.0\.0$/.exec(inkPeerReact)?.[1];
+    const floor = /^>=(\d+\.\d+\.\d+)$/.exec(inkPeerReact)?.[1];
     expect(floor, `unexpected ink peer range: ${inkPeerReact}`).toBeDefined();
     expect(
       rootReact,
-      `root react must be ^${floor}.0.0 so npm can dedupe with any React ${floor} a consumer pins`,
-    ).toBe(`^${floor}.0.0`);
+      `root react must be ^${floor} so npm can dedupe with any React ${floor} a consumer pins`,
+    ).toBe(`^${floor}`);
   });
 
   it("keeps each exempt package external, and declared for consumers", () => {
